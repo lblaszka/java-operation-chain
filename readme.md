@@ -1,4 +1,6 @@
 # Operation Chain
+[![](https://jitpack.io/v/lblaszka/java-operation-chain.svg)](https://jitpack.io/#lblaszka/java-operation-chain)
+
 A simple library for creating a chain of operations. 
 The main benefit of using this library is the ability to declare undo operations if any operation in chain fails.
 
