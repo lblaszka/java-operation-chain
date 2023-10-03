@@ -87,8 +87,6 @@ class OperationNodeUnitTest {
         OperationNode nextOperationNode = mock(OperationNode.class);
         when(nextOperationNode.apply(any())).thenReturn((OperationResult)OperationResult.fail(null));
 
-        Consumer<?> undoFunction = mock(Consumer.class);
-
         OperationNode<?, ?> operationNode = OperationNode.of((Function) ign -> ign, null);
         operationNode.setNextNode(nextOperationNode);
 

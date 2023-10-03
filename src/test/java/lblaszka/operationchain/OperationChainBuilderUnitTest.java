@@ -16,7 +16,7 @@ class OperationChainBuilderUnitTest {
 
         Function<String, ?> function = mock(Function.class);
 
-        OperationChain<String, ?> operationChain = new OperationChainBuilder<String, String>(OperationNode.of(ign -> ign))
+        OperationChain<String> operationChain = new OperationChainBuilder<String, String>(OperationNode.of(ign -> ign))
                 .next(function).createChain();
 
 
@@ -37,7 +37,7 @@ class OperationChainBuilderUnitTest {
 
         Function<String, ?> throwingFunction = ign -> {throw new RuntimeException();};
 
-        OperationChain<String, ?> operationChain = new OperationChainBuilder<String, String>(OperationNode.of(ign -> ign))
+        OperationChain<String> operationChain = new OperationChainBuilder<String, String>(OperationNode.of(ign -> ign))
                 .next(function, undoFunction)
                 .next(throwingFunction)
                 .createChain();
@@ -52,7 +52,7 @@ class OperationChainBuilderUnitTest {
 
     @Test
     public void testCreateChainMethod() {
-        OperationChain<String, ?> operationChain = new OperationChainBuilder<String, String>(OperationNode.of(ign -> ign))
+        OperationChain<String> operationChain = new OperationChainBuilder<String, String>(OperationNode.of(ign -> ign))
                 .createChain();
 
 
@@ -87,7 +87,7 @@ class OperationChainBuilderUnitTest {
         Consumer<String> onSuccess = mock(Consumer.class);
         Consumer<Throwable> onFail = mock(Consumer.class);
 
-        OperationChain<String, String> operationChain = new OperationChainBuilder<>(OperationNode.of(function))
+        OperationChain<String> operationChain = new OperationChainBuilder<>(OperationNode.of(function))
                 .createChain(onSuccess, onFail);
 
         operationChain.process(exceptionSuccess);
