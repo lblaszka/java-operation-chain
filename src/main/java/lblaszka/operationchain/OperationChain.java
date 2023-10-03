@@ -3,7 +3,7 @@ package lblaszka.operationchain;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public class OperationChain<T, R> {
+public class OperationChain<T> {
 
     public static <T, R> OperationChainBuilder<T, R> start(Function<T,R> operationFunction) {
         return new OperationChainBuilder<T,R>(OperationNode.of(operationFunction));
@@ -14,10 +14,10 @@ public class OperationChain<T, R> {
     }
 
     private final OperationNode<T, ?> firstNode;
-    private final Consumer<R> onSuccess;
+    private final Consumer onSuccess;
     private final Consumer<Throwable> onFail;
 
-    OperationChain(OperationNode<T, ?> firstNode, Consumer<R> onSuccess, Consumer<Throwable> onFail) {
+    OperationChain(OperationNode<T, ?> firstNode, Consumer onSuccess, Consumer<Throwable> onFail) {
         this.firstNode = firstNode;
         this.onSuccess = onSuccess;
         this.onFail = onFail;
@@ -28,7 +28,7 @@ public class OperationChain<T, R> {
 
         if(operationResult.isSuccess()) {
             if(this.onSuccess != null) {
-                this.onSuccess.accept((R) operationResult.get());
+                this.onSuccess.accept(operationResult.get());
             }
         } else {
             if(this.onFail != null) {

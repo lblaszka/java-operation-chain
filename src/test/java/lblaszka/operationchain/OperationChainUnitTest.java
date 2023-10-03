@@ -60,7 +60,7 @@ class OperationChainUnitTest {
         OperationNode<String,?> operationNode = mock(OperationNode.class);
         when(operationNode.apply(any())).thenReturn(OperationResult.success(null));
 
-        OperationChain<String,?> operationChain = new OperationChain<>(operationNode, ign -> {}, ign -> {});
+        OperationChain<String> operationChain = new OperationChain<>(operationNode, ign -> {}, ign -> {});
 
 
         operationChain.process(expected);
@@ -78,7 +78,7 @@ class OperationChainUnitTest {
 
         Consumer<String> onSuccess = mock(Consumer.class);
 
-        OperationChain<String, String> operationChain = new OperationChain<>(operationNode, onSuccess, ign -> {});
+        OperationChain<String> operationChain = new OperationChain<>(operationNode, onSuccess, ign -> {});
 
 
         operationChain.process(expected);
@@ -92,9 +92,7 @@ class OperationChainUnitTest {
         OperationNode<String,?> operationNode = mock(OperationNode.class);
         when(operationNode.apply(any())).thenReturn(OperationResult.success(null));
 
-        Consumer<String> onSuccess = mock(Consumer.class);
-
-        OperationChain<String, String> operationChain = new OperationChain<>(operationNode, null, ign -> {});
+        OperationChain<String> operationChain = new OperationChain<>(operationNode, null, ign -> {});
 
 
         assertDoesNotThrow(() -> operationChain.process(""));
@@ -109,7 +107,7 @@ class OperationChainUnitTest {
 
         Consumer<Throwable> onFail = mock(Consumer.class);
 
-        OperationChain<String, String> operationChain = new OperationChain<>(operationNode, ign -> {}, onFail);
+        OperationChain<String> operationChain = new OperationChain<>(operationNode, ign -> {}, onFail);
 
 
         operationChain.process("");
@@ -123,7 +121,7 @@ class OperationChainUnitTest {
         OperationNode<String,?> operationNode = mock(OperationNode.class);
         when(operationNode.apply(any())).thenReturn((OperationResult) OperationResult.fail(new RuntimeException()));
 
-        OperationChain<String, String> operationChain = new OperationChain<>(operationNode, ign -> {}, null);
+        OperationChain<String> operationChain = new OperationChain<>(operationNode, ign -> {}, null);
 
 
         assertDoesNotThrow(() -> operationChain.process(""));

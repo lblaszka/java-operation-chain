@@ -31,15 +31,15 @@ public class OperationChainBuilder<T, R> {
         return new OperationChainBuilder<T, LR>(this.firstChainNode, operationNode);
     }
 
-    public OperationChain<T, R> createChain() {
+    public OperationChain<T> createChain() {
         return this.createChain(null, null);
     }
 
-    public OperationChain<T, R> createChain(Consumer<R> onSuccess) {
+    public OperationChain<T> createChain(Consumer<R> onSuccess) {
         return this.createChain(onSuccess, null);
     }
 
-    public OperationChain<T, R> createChain(Consumer<R> onSuccess, Consumer<Throwable> onFail) {
+    public OperationChain<T> createChain(Consumer<R> onSuccess, Consumer<Throwable> onFail) {
         return new OperationChain<>(this.firstChainNode, onSuccess, onFail);
     }
 }
